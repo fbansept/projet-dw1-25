@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-accueil',
-  imports: [],
+  imports: [MatCardModule, MatButtonModule],
   templateUrl: './accueil.component.html',
   styleUrl: './accueil.component.scss',
 })

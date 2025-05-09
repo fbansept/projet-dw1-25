@@ -8,6 +8,10 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-connexion',
@@ -18,6 +22,9 @@ import { MatInputModule } from '@angular/material/input';
 export class ConnexionComponent {
   formBuilder = inject(FormBuilder);
   http = inject(HttpClient);
+  auth = inject(AuthService);
+  router = inject(Router);
+  notification = inject(NotificationService);
 
   formulaire = this.formBuilder.group({
     email: ['a@a', [Validators.email, Validators.required]],
@@ -30,7 +37,11 @@ export class ConnexionComponent {
         .post('http://localhost:5000/connexion', this.formulaire.value, {
           responseType: 'text',
         })
-        .subscribe((jwt) => localStorage.setItem('jwt', jwt));
+        .subscribe((jwt) => {
+          this.auth.setJwt(jwt);
+          this.notification.show('Vous êtes connecté', 'info');
+          this.router.navigateByUrl('/accueil');
+        });
     }
   }
 }
