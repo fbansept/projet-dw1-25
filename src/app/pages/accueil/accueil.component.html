@@ -1,1 +1,8 @@
-<p>accueil works!</p>
+<ul>
+
+    @for (produit of produits; track $index) {
+        <li>{{produit.nom}}</li>
+    }
+    
+
+</ul>

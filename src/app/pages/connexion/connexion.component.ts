@@ -27,8 +27,10 @@ export class ConnexionComponent {
   onConnexion() {
     if (this.formulaire.valid) {
       this.http
-        .post('http://localhost:5000/connexion', this.formulaire.value)
-        .subscribe((resultat) => console.log(resultat));
+        .post('http://localhost:5000/connexion', this.formulaire.value, {
+          responseType: 'text',
+        })
+        .subscribe((jwt) => localStorage.setItem('jwt', jwt));
     }
   }
 }
