@@ -1,1 +1,28 @@
-<p>edition-produit works!</p>
+<form [formGroup]="formulaire" (ngSubmit)="onClicValider()">
+  <mat-form-field>
+    <mat-label>Nom</mat-label>
+    <input matInput formControlName="nom" />
+    @if(formulaire.get("nom")?.hasError('required')) {
+      <mat-error>Le nom est obligatoire</mat-error>
+    } @else if(formulaire.get("nom")?.hasError('maxlength')) {
+      <mat-error>Le nom doit être de 20 caractères maximum</mat-error>
+    } @else if(formulaire.get("nom")?.hasError('minlength')) {
+      <mat-error>Le nom doit être de 3 caractères minimum</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+    <mat-error>La description doit être de 50 caractères maximum</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Prix</mat-label>
+    <input matInput formControlName="prix" type="number" min="0" />
+    <mat-error>Le prix doit être d'au moins 1 centime</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button>Valider</button>
+  <button mat-raised-button routerLink="/accueil">Retour</button>
+</form>
