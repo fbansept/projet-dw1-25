@@ -5,7 +5,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 
-
 @Component({
   selector: 'app-accueil',
   imports: [MatCardModule, MatButtonModule, RouterLink],
@@ -17,14 +16,10 @@ export class AccueilComponent {
   produits: Produit[] = [];
 
   ngOnInit() {
-    const jwt = localStorage.getItem('jwt');
 
-    if (jwt) {
-      this.http
-        .get<Produit[]>('http://localhost:5000/produits', {
-          headers: { Authorization: jwt },
-        })
-        .subscribe((produits) => (this.produits = produits));
-    }
+    this.http
+      .get<Produit[]>('http://localhost:5000/produits')
+      .subscribe((produits) => (this.produits = produits));
+
   }
 }
