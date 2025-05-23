@@ -10,6 +10,7 @@ export const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'ajout-produit', component: EditionProduitComponent },
+  { path: 'modifier-produit/:id', component: EditionProduitComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
   { path: '**', component: Page404Component },
 ];
